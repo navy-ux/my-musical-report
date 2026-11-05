@@ -1,4 +1,608 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>나만의 관극 다이어리 & 공연 DB</title>
+  <style>
+    :root {
+      --primary: #6b46c1;
+      --primary-light: #9f7aea;
+      --bg: #f7fafc;
+      --card-bg: #ffffff;
+      --text: #2d3748;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', -apple-system, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding-bottom: 50px; }
+    
+    header { background: var(--primary); color: white; padding: 1.5rem; text-align: center; font-size: 1.5rem; font-weight: bold; }
+    nav { display: flex; justify-content: center; background: white; border-bottom: 1px solid var(--border); }
+    nav button { padding: 1rem 2rem; border: none; background: none; font-size: 1rem; font-weight: bold; cursor: pointer; color: #718096; }
+    nav button.active { color: var(--primary); border-bottom: 3px solid var(--primary); }
+
+    .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* 통계 카드 */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); text-align: center; }
+    .stat-value { font-size: 1.8rem; font-weight: bold; color: var(--primary); margin-top: 0.5rem; }
+
+    /* 캘린더 */
+    .calendar-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; background: white; padding: 1rem; border-radius: 12px; }
+    .calendar-day-header { text-align: center; font-weight: bold; padding: 0.5rem; color: #718096; }
+    .calendar-day { min-height: 90px; border: 1px solid var(--border); border-radius: 6px; padding: 4px; background: #fff; position: relative; }
+    .day-number { font-size: 0.8rem; font-weight: bold; color: #a0aec0; }
+    .log-badge { background: var(--primary-light); color: white; font-size: 0.75rem; padding: 2px 4px; border-radius: 4px; margin-top: 4px; cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    /* 재관판 */
+    .stamp-board { background: white; padding: 1.5rem; border-radius: 12px; margin-top: 2rem; }
+    .stamp-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1rem; }
+    .stamp { width: 45px; height: 45px; border-radius: 50%; border: 2px dashed var(--primary-light); display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--primary-light); font-size: 0.8rem; }
+    .stamp.active { background: var(--primary); color: white; border: 2px solid var(--primary); }
+
+    /* 공연 DB 카드리스트 */
+    .show-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+    .show-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: flex; flex-direction: column; }
+    .show-poster { width: 100%; height: 320px; object-fit: cover; background: #edf2f7; }
+    .show-info { padding: 1rem; flex-grow: 1; display: flex; flex-direction: column; }
+    .show-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem; }
+    .show-detail { font-size: 0.85rem; color: #4a5568; margin-bottom: 0.3rem; }
+    .show-actions { margin-top: auto; display: flex; gap: 0.5rem; padding-top: 1rem; }
+
+    /* 캐스트 인물 카드 레이아웃 */
+    .role-section { margin-bottom: 1.5rem; background: #f8fafc; padding: 1rem; border-radius: 8px; border: 1px solid var(--border); }
+    .role-title { font-weight: bold; color: var(--primary); font-size: 1.05rem; margin-bottom: 0.8rem; border-bottom: 2px solid var(--primary-light); padding-bottom: 4px; display: inline-block; }
+    .actor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 1rem; }
+    .actor-card { text-align: center; background: white; padding: 8px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .actor-photo { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; background: #e2e8f0; margin-bottom: 6px; }
+    .actor-name { font-size: 0.85rem; font-weight: bold; color: var(--text); }
+
+    /* 캐스트 입력용 폼 Row */
+    .cast-input-row { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; background: #f7fafc; padding: 8px; border-radius: 6px; border: 1px solid var(--border); }
+    .cast-input-row input { flex: 1; padding: 0.4rem; font-size: 0.85rem; }
+
+    /* 버튼 스타일 */
+    .btn { padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 0.9rem; }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-secondary { background: #e2e8f0; color: #4a5568; }
+    .btn-danger { background: #e53e3e; color: white; }
+
+    /* 모달 팝업 */
+    .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
+    .modal.active { display: flex; }
+    .modal-content { background: white; padding: 2rem; border-radius: 12px; width: 90%; max-width: 650px; max-height: 90vh; overflow-y: auto; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-weight: bold; margin-bottom: 0.3rem; font-size: 0.9rem; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.6rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <header>🎭 뮤지컬 & 연극 관극 다이어리</header>
+
+  <nav>
+    <button class="nav-btn active" onclick="switchTab('mypage')">마이페이지 (내 관극)</button>
+    <button class="nav-btn" onclick="switchTab('shows')">공연 DB & 스케줄</button>
+  </nav>
+
+  <div class="container">
+    
+    <!-- 1. 마이페이지 (내 관극/통계/달력) -->
+    <div id="mypage" class="tab-content active">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h2>📊 관극 통계</h2>
+        <select id="yearFilter" onchange="renderMypage()" style="padding: 0.4rem 1rem; border-radius: 6px;">
+          <option value="ALL">전체 연도 보기</option>
+          <option value="2026" selected>2026년</option>
+          <option value="2025">2025년</option>
+        </select>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div>총 관극 횟수</div>
+          <div class="stat-value" id="statTotalCount">0회</div>
+        </div>
+        <div class="stat-card">
+          <div>총 관람 금액</div>
+          <div class="stat-value" id="statTotalSpend">0원</div>
+        </div>
+        <div class="stat-card">
+          <div>최다 관람 배우</div>
+          <div class="stat-value" id="statTopActor">-</div>
+          <button class="btn btn-secondary" style="font-size:0.75rem; margin-top:5px;" onclick="showRankModal('actor')">전체 순위 보기</button>
+        </div>
+        <div class="stat-card">
+          <div>최다 관람 작품</div>
+          <div class="stat-value" id="statTopShow">-</div>
+          <button class="btn btn-secondary" style="font-size:0.75rem; margin-top:5px;" onclick="showRankModal('show')">전체 순위 보기</button>
+        </div>
+      </div>
+
+      <!-- 캘린더 -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h2>📅 관극 캘린더</h2>
+        <button class="btn btn-primary" onclick="openLogModal()">+ 직접 관극 등록</button>
+      </div>
+
+      <div class="calendar-controls">
+        <button class="btn btn-secondary" onclick="changeMonth(-1)">◀ 이전 달</button>
+        <h3 id="currentMonthStr">2026년 11월</h3>
+        <button class="btn btn-secondary" onclick="changeMonth(1)">다음 달 ▶</button>
+      </div>
+
+      <div class="calendar-grid" id="calendarGrid"></div>
+
+      <!-- 재관람 판 -->
+      <div class="stamp-board">
+        <h3>🎟️ 작품별 재관람 도장판</h3>
+        <select id="stampShowSelect" onchange="renderStampBoard()" style="margin: 1rem 0; padding: 0.5rem; width: 100%; border-radius: 6px;">
+        </select>
+        <div class="stamp-grid" id="stampGrid"></div>
+      </div>
+    </div>
+
+    <!-- 2. 공연 DB & 스케줄 -->
+    <div id="shows" class="tab-content">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>🎭 등록된 공연 목록</h2>
+        <button class="btn btn-primary" onclick="openShowModal()">+ 신규 공연 등록</button>
+      </div>
+      <div class="show-grid" id="showGrid"></div>
+    </div>
+
+  </div>
+
+  <!-- 모달 1: 관극 기록 작성/수정 -->
+  <div class="modal" id="logModal">
+    <div class="modal-content">
+      <h3 id="logModalTitle" style="margin-bottom: 1rem;">관극 기록 추가</h3>
+      <input type="hidden" id="logId">
+      <div class="form-group"><label>공연 이름</label><input type="text" id="logTitle" required></div>
+      <div class="form-group"><label>관람 날짜 및 시간</label><input type="datetime-local" id="logDate" required></div>
+      <div class="form-group"><label>캐스트 (쉼표로 구분)</label><input type="text" id="logCast" placeholder="예: 최수진, 백은혜"></div>
+      <div class="form-group"><label>공연장</label><input type="text" id="logTheater"></div>
+      <div class="form-group"><label>좌석 정보</label><input type="text" id="logSeat" placeholder="예: 1층 B구역 5열 12번"></div>
+      <div class="form-group"><label>티켓 금액 (원)</label><input type="number" id="logPrice" placeholder="100000"></div>
+      <div class="form-group"><label>예매처</label><input type="text" id="logTicketOffice" placeholder="예: 인터파크, YES24"></div>
+      <div class="form-group"><label>할인 권종</label><input type="text" id="logDiscount" placeholder="예: 재관람 할인 20%"></div>
+      <div class="form-group"><label>이벤트 / 혜택</label><input type="text" id="logEvent" placeholder="예: 미니포토북 증정"></div>
+      <div class="form-group"><label>관극 후기 / 메모</label><textarea id="logReview" rows="4"></textarea></div>
+      
+      <div style="display: flex; justify-content: flex-end; gap: 0.5rem;">
+        <button class="btn btn-danger" id="btnDeleteLog" onclick="deleteLog()" style="display:none;">삭제</button>
+        <button class="btn btn-secondary" onclick="closeModal('logModal')">취소</button>
+        <button class="btn btn-primary" onclick="saveLog()">저장</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 모달 2: 신규 공연 등록/수정 -->
+  <div class="modal" id="showModal">
+    <div class="modal-content">
+      <h3 id="showModalTitle" style="margin-bottom: 1rem;">공연 DB 등록</h3>
+      <input type="hidden" id="showId">
+      <div class="form-group">
+        <label>공연 메인 포스터 이미지</label>
+        <input type="file" accept="image/*" onchange="handleMainPosterUpload(event)" style="margin-bottom:5px;">
+        <input type="text" id="showPosterUrl" placeholder="또는 이미지 URL 직접 입력">
+      </div>
+      <div class="form-group"><label>작품명</label><input type="text" id="showTitle" required></div>
+      <div class="form-group"><label>공연장</label><input type="text" id="showTheater"></div>
+      <div class="form-group"><label>공연 기간</label><input type="text" id="showPeriod" placeholder="2026.12.01 ~ 2027.02.28"></div>
+      <div class="form-group"><label>공연 시간 (상세 스케줄)</label><input type="text" id="showTime" placeholder="예: 화-금 19:30 / 토, 일 14:00, 18:30"></div>
+      
+      <!-- 배역 및 캐스트별 포스터 첨부 섹션 -->
+      <div class="form-group">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+          <label style="margin:0;">🎭 배역별 출연진 & 배우 포스터 등록</label>
+          <button type="button" class="btn btn-secondary" style="font-size:0.75rem;" onclick="addCastInputRow()">+ 배우 추가</button>
+        </div>
+        <div id="castInputContainer"></div>
+      </div>
+      
+      <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1rem;">
+        <button class="btn btn-secondary" onclick="closeModal('showModal')">취소</button>
+        <button class="btn btn-primary" onclick="saveShow()">공연 저장</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 모달 3: 공연 스케줄표 & 배역별 캐스팅 포스터 팝업 -->
+  <div class="modal" id="scheduleModal">
+    <div class="modal-content">
+      <h3 id="scheduleModalTitle" style="margin-bottom: 1rem;">📅 공연 상세 스케줄 & 캐스팅</h3>
+      <div style="text-align: center; margin-bottom: 1rem;">
+        <img id="schedulePoster" src="" style="max-width: 180px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
+      </div>
+      <div class="form-group">
+        <label>공연 장소 & 기간</label>
+        <p id="scheduleVenuePeriod" style="background: #edf2f7; padding: 0.6rem; border-radius: 6px; font-size: 0.9rem;"></p>
+      </div>
+      <div class="form-group">
+        <label>공연 시간</label>
+        <p id="scheduleTimeText" style="background: #edf2f7; padding: 0.6rem; border-radius: 6px; font-size: 0.9rem;"></p>
+      </div>
+      <div class="form-group">
+        <label>배역별 출연 캐스트</label>
+        <div id="scheduleCastContainer" style="margin-top: 0.5rem;"></div>
+      </div>
+      <div style="display: flex; justify-content: flex-end;">
+        <button class="btn btn-primary" onclick="closeModal('scheduleModal')">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 모달 4: 순위 전체보기 -->
+  <div class="modal" id="rankModal">
+    <div class="modal-content">
+      <h3 id="rankModalTitle" style="margin-bottom: 1rem;">전체 순위</h3>
+      <ol id="rankList" style="padding-left: 1.5rem; line-height: 2; font-weight: bold;"></ol>
+      <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem;">
+        <button class="btn btn-secondary" onclick="closeModal('rankModal')">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let logs = JSON.parse(localStorage.getItem('myLogs')) || [
+      { id: 1, title: "아가사", date: "2026-12-05T19:30", cast: "최수진, 김재범", theater: "대학로 예스24스테이지", seat: "1층 B구역 5열", price: 77000, ticketOffice: "인터파크", discount: "조기예매 20%", event: "포토카드", review: "몰입감 대박!" }
+    ];
+
+    let shows = JSON.parse(localStorage.getItem('myShows')) || [
+      { 
+        id: 1, 
+        title: "아가사", 
+        poster: "https://via.placeholder.com/300x400?text=Agatha", 
+        theater: "대학로 예스24스테이지", 
+        period: "2026.12.01 ~ 2027.02.28", 
+        time: "화-금 19:30 / 토,일 14:00, 18:00", 
+        castList: [
+          { role: "아가사", actor: "최수진", photo: "https://via.placeholder.com/120x150?text=최수진" },
+          { role: "아가사", actor: "백은혜", photo: "https://via.placeholder.com/120x150?text=백은혜" },
+          { role: "아가사", actor: "이정화", photo: "https://via.placeholder.com/120x150?text=이정화" },
+          { role: "로이", actor: "김재범", photo: "https://via.placeholder.com/120x150?text=김재범" }
+        ]
+      }
+    ];
+
+    let currentYear = 2026;
+    let currentMonth = 10;
+    let tempMainPoster = "";
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+      if(tabId === 'mypage') renderMypage();
+      if(tabId === 'shows') renderShows();
+    }
+
+    function handleMainPosterUpload(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) { tempMainPoster = evt.target.result; };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function renderMypage() {
+      const selectedYear = document.getElementById('yearFilter').value;
+      const filteredLogs = selectedYear === 'ALL' ? logs : logs.filter(l => new Date(l.date).getFullYear().toString() === selectedYear);
+
+      document.getElementById('statTotalCount').innerText = `${filteredLogs.length}회`;
+      const totalSpend = filteredLogs.reduce((sum, l) => sum + Number(l.price || 0), 0);
+      document.getElementById('statTotalSpend').innerText = `${totalSpend.toLocaleString()}원`;
+
+      const actorCounts = {};
+      filteredLogs.forEach(l => {
+        if(l.cast) l.cast.split(',').map(c=>c.trim()).forEach(actor => {
+          if(actor) actorCounts[actor] = (actorCounts[actor] || 0) + 1;
+        });
+      });
+      const sortedActors = Object.entries(actorCounts).sort((a,b)=>b[1]-a[1]);
+      document.getElementById('statTopActor').innerText = sortedActors.length ? `${sortedActors[0][0]} (${sortedActors[0][1]}회)` : '-';
+
+      const showCounts = {};
+      filteredLogs.forEach(l => {
+        if(l.title) showCounts[l.title] = (showCounts[l.title] || 0) + 1;
+      });
+      const sortedShows = Object.entries(showCounts).sort((a,b)=>b[1]-a[1]);
+      document.getElementById('statTopShow').innerText = sortedShows.length ? `${sortedShows[0][0]} (${sortedShows[0][1]}회)` : '-';
+
+      renderCalendar();
+      updateStampSelect(filteredLogs);
+    }
+
+    function renderCalendar() {
+      const grid = document.getElementById('calendarGrid');
+      grid.innerHTML = '';
+      document.getElementById('currentMonthStr').innerText = `${currentYear}년 ${currentMonth + 1}월`;
+
+      const headers = ['일', '월', '화', '수', '목', '금', '토'];
+      headers.forEach(h => grid.innerHTML += `<div class="calendar-day-header">${h}</div>`);
+
+      const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+      const lastDate = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+      for (let i = 0; i < firstDay; i++) {
+        grid.innerHTML += `<div class="calendar-day" style="background:#f7fafc;"></div>`;
+      }
+
+      for (let date = 1; date <= lastDate; date++) {
+        const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+        const dayLogs = logs.filter(l => l.date.startsWith(dateStr));
+
+        let dayHtml = `<div class="calendar-day"><div class="day-number">${date}</div>`;
+        dayLogs.forEach(log => {
+          dayHtml += `<div class="log-badge" onclick="openLogModal(${log.id})">${log.title}</div>`;
+        });
+        dayHtml += `</div>`;
+        grid.innerHTML += dayHtml;
+      }
+    }
+
+    function changeMonth(delta) {
+      currentMonth += delta;
+      if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+      if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+      renderCalendar();
+    }
+
+    function updateStampSelect(filteredLogs) {
+      const select = document.getElementById('stampShowSelect');
+      const uniqueShows = [...new Set(filteredLogs.map(l => l.title))];
+      select.innerHTML = uniqueShows.map(s => `<option value="${s}">${s}</option>`).join('');
+      if(uniqueShows.length === 0) select.innerHTML = '<option value="">관극 기록이 없습니다</option>';
+      renderStampBoard();
+    }
+
+    function renderStampBoard() {
+      const showTitle = document.getElementById('stampShowSelect').value;
+      const count = logs.filter(l => l.title === showTitle).length;
+      const stampGrid = document.getElementById('stampGrid');
+      stampGrid.innerHTML = '';
+
+      for(let i = 1; i <= 10; i++) {
+        stampGrid.innerHTML += `<div class="stamp ${i <= count ? 'active' : ''}">${i}</div>`;
+      }
+    }
+
+    function renderShows() {
+      const grid = document.getElementById('showGrid');
+      grid.innerHTML = shows.map(s => `
+        <div class="show-card">
+          <img class="show-poster" src="${s.poster || 'https://via.placeholder.com/300x400'}" alt="${s.title}">
+          <div class="show-info">
+            <div class="show-title">${s.title}</div>
+            <div class="show-detail">📍 ${s.theater || '공연장 미정'}</div>
+            <div class="show-detail">📅 ${s.period || '기간 미정'}</div>
+            <div class="show-actions">
+              <button class="btn btn-secondary" style="font-size:0.8rem;" onclick="openScheduleModal(${s.id})">📅 스케줄표 보기</button>
+              <button class="btn btn-primary" style="font-size:0.8rem;" onclick="addShowToLog('${s.title}', '${s.theater}')">관극 추가</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 캐스팅 동적 폼 제어
+    function addCastInputRow(role = '', actor = '', photo = '') {
+      const container = document.getElementById('castInputContainer');
+      const rowId = 'cast_row_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
+      
+      const div = document.createElement('div');
+      div.className = 'cast-input-row';
+      div.id = rowId;
+      div.innerHTML = `
+        <input type="text" placeholder="배역명 (예: 아가사)" class="cast-role" value="${role}" style="flex:1;">
+        <input type="text" placeholder="배우명 (예: 최수진)" class="cast-actor" value="${actor}" style="flex:1;">
+        <input type="file" accept="image/*" class="cast-photo-file" style="flex:1.2; font-size:0.75rem;" onchange="handleActorPhotoUpload(event, '${rowId}')">
+        <input type="hidden" class="cast-photo-val" value="${photo}">
+        <button type="button" class="btn btn-danger" style="padding:0.3rem 0.6rem; font-size:0.75rem;" onclick="document.getElementById('${rowId}').remove()">X</button>
+      `;
+      container.appendChild(div);
+    }
+
+    function handleActorPhotoUpload(e, rowId) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          document.querySelector(`#${rowId} .cast-photo-val`).value = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function openShowModal() {
+      tempMainPoster = "";
+      document.getElementById('showModal').classList.add('active');
+      document.querySelectorAll('#showModal input[type="text"]').forEach(i => i.value = '');
+      document.getElementById('castInputContainer').innerHTML = '';
+      // 기본 행 2개 생성
+      addCastInputRow("아가사", "최수진");
+      addCastInputRow("아가사", "백은혜");
+    }
+
+    function saveShow() {
+      const posterUrlInput = document.getElementById('showPosterUrl').value;
+      
+      // 캐스트 입력 정보 수집
+      const castRows = document.querySelectorAll('.cast-input-row');
+      const castList = [];
+      castRows.forEach(row => {
+        const role = row.querySelector('.cast-role').value.trim();
+        const actor = row.querySelector('.cast-actor').value.trim();
+        const photo = row.querySelector('.cast-photo-val').value;
+        if(role && actor) {
+          castList.push({ role, actor, photo: photo || 'https://via.placeholder.com/120x150?text=' + encodeURIComponent(actor) });
+        }
+      });
+
+      const showData = {
+        id: Date.now(),
+        title: document.getElementById('showTitle').value,
+        poster: tempMainPoster || posterUrlInput || 'https://via.placeholder.com/300x400',
+        theater: document.getElementById('showTheater').value,
+        period: document.getElementById('showPeriod').value,
+        time: document.getElementById('showTime').value,
+        castList: castList
+      };
+
+      shows.push(showData);
+      localStorage.setItem('myShows', JSON.stringify(shows));
+      closeModal('showModal');
+      renderShows();
+    }
+
+    function openScheduleModal(showId) {
+      const show = shows.find(s => s.id === showId);
+      document.getElementById('scheduleModalTitle').innerText = `${show.title} - 상세 스케줄`;
+      document.getElementById('schedulePoster').src = show.poster || 'https://via.placeholder.com/300x400';
+      document.getElementById('scheduleVenuePeriod').innerText = `${show.theater || '미정'} (${show.period || '미정'})`;
+      document.getElementById('scheduleTimeText').innerText = show.time || '등록된 공연 시간 정보가 없습니다.';
+      
+      const castContainer = document.getElementById('scheduleCastContainer');
+      castContainer.innerHTML = '';
+
+      if (show.castList && show.castList.length > 0) {
+        // 배역별로 그룹화
+        const groupedRoles = {};
+        show.castList.forEach(c => {
+          if(!groupedRoles[c.role]) groupedRoles[c.role] = [];
+          groupedRoles[c.role].push(c);
+        });
+
+        for (const [role, actors] of Object.entries(groupedRoles)) {
+          let roleHtml = `
+            <div class="role-section">
+              <div class="role-title">[${role}]</div>
+              <div class="actor-grid">
+          `;
+          actors.forEach(a => {
+            roleHtml += `
+              <div class="actor-card">
+                <img class="actor-photo" src="${a.photo}" alt="${a.actor}">
+                <div class="actor-name">${a.actor}</div>
+              </div>
+            `;
+          });
+          roleHtml += `</div></div>`;
+          castContainer.innerHTML += roleHtml;
+        }
+      } else {
+        castContainer.innerHTML = '<p style="color:#718096;">등록된 캐스팅 포스터 정보가 없습니다.</p>';
+      }
+
+      document.getElementById('scheduleModal').classList.add('active');
+    }
+
+    function openLogModal(id = null) {
+      document.getElementById('logModal').classList.add('active');
+      if(id) {
+        const log = logs.find(l => l.id === id);
+        document.getElementById('logModalTitle').innerText = "관극 기록 수정";
+        document.getElementById('logId').value = log.id;
+        document.getElementById('logTitle').value = log.title;
+        document.getElementById('logDate').value = log.date;
+        document.getElementById('logCast').value = log.cast;
+        document.getElementById('logTheater').value = log.theater;
+        document.getElementById('logSeat').value = log.seat;
+        document.getElementById('logPrice').value = log.price;
+        document.getElementById('logTicketOffice').value = log.ticketOffice;
+        document.getElementById('logDiscount').value = log.discount;
+        document.getElementById('logEvent').value = log.event;
+        document.getElementById('logReview').value = log.review;
+        document.getElementById('btnDeleteLog').style.display = 'inline-block';
+      } else {
+        document.getElementById('logModalTitle').innerText = "관극 기록 추가";
+        document.getElementById('logId').value = '';
+        document.querySelectorAll('#logModal input, #logModal textarea').forEach(i => i.value = '');
+        document.getElementById('btnDeleteLog').style.display = 'none';
+      }
+    }
+
+    function saveLog() {
+      const id = document.getElementById('logId').value;
+      const logData = {
+        id: id ? Number(id) : Date.now(),
+        title: document.getElementById('logTitle').value,
+        date: document.getElementById('logDate').value,
+        cast: document.getElementById('logCast').value,
+        theater: document.getElementById('logTheater').value,
+        seat: document.getElementById('logSeat').value,
+        price: document.getElementById('logPrice').value,
+        ticketOffice: document.getElementById('logTicketOffice').value,
+        discount: document.getElementById('logDiscount').value,
+        event: document.getElementById('logEvent').value,
+        review: document.getElementById('logReview').value
+      };
+
+      if(id) {
+        const idx = logs.findIndex(l => l.id === Number(id));
+        logs[idx] = logData;
+      } else {
+        logs.push(logData);
+      }
+
+      localStorage.setItem('myLogs', JSON.stringify(logs));
+      closeModal('logModal');
+      renderMypage();
+    }
+
+    function deleteLog() {
+      const id = Number(document.getElementById('logId').value);
+      logs = logs.filter(l => l.id !== id);
+      localStorage.setItem('myLogs', JSON.stringify(logs));
+      closeModal('logModal');
+      renderMypage();
+    }
+
+    function addShowToLog(title, theater) {
+      switchTab('mypage');
+      openLogModal();
+      document.getElementById('logTitle').value = title;
+      document.getElementById('logTheater').value = theater;
+    }
+
+    function showRankModal(type) {
+      const list = document.getElementById('rankList');
+      list.innerHTML = '';
+      document.getElementById('rankModalTitle').innerText = type === 'actor' ? '👑 배우별 최다 관람 순위' : '🎭 작품별 최다 관람 순위';
+
+      const counts = {};
+      logs.forEach(l => {
+        if(type === 'actor' && l.cast) {
+          l.cast.split(',').map(c=>c.trim()).forEach(a => { if(a) counts[a] = (counts[a]||0)+1; });
+        } else if(type === 'show' && l.title) {
+          counts[l.title] = (counts[l.title]||0)+1;
+        }
+      });
+
+      const sorted = Object.entries(counts).sort((a,b)=>b[1]-a[1]);
+      sorted.forEach(([name, count]) => {
+        list.innerHTML += `<li>${name} : ${count}회</li>`;
+      });
+
+      document.getElementById('rankModal').classList.add('active');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    // 초기 실행
+    renderMypage();
+  </script>
+</body>
+</html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">

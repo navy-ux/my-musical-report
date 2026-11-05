@@ -1,4 +1,4 @@
-<!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -14,11 +14,11 @@
       --border: #e2e8f0;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', -apple-system, sans-serif; }
-    body { background-color: var(--bg); color: var(--text); padding-bottom: 50px; }
+    body { background-color: var(--bg); color: var(--text); padding-bottom: 50px; line-height: 1.5; }
     
-    header { background: var(--primary); color: white; padding: 1.5rem; text-align: center; font-size: 1.5rem; font-weight: bold; }
+    header { background: var(--primary); color: white; padding: 1.5rem; text-align: center; font-size: 1.6rem; font-weight: bold; letter-spacing: -0.5px; }
     nav { display: flex; justify-content: center; background: white; border-bottom: 1px solid var(--border); }
-    nav button { padding: 1rem 2rem; border: none; background: none; font-size: 1rem; font-weight: bold; cursor: pointer; color: #718096; }
+    nav button { padding: 1rem 2rem; border: none; background: none; font-size: 1.05rem; font-weight: bold; cursor: pointer; color: #718096; }
     nav button.active { color: var(--primary); border-bottom: 3px solid var(--primary); }
 
     .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
@@ -32,38 +32,31 @@
 
     /* 캘린더 */
     .calendar-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-    .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; background: white; padding: 1rem; border-radius: 12px; }
+    .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; background: white; padding: 1rem; border-radius: 12px; border: 1px solid var(--border); }
     .calendar-day-header { text-align: center; font-weight: bold; padding: 0.5rem; color: #718096; }
-    .calendar-day { min-height: 90px; border: 1px solid var(--border); border-radius: 6px; padding: 4px; background: #fff; position: relative; }
-    .day-number { font-size: 0.8rem; font-weight: bold; color: #a0aec0; }
-    .log-badge { background: var(--primary-light); color: white; font-size: 0.75rem; padding: 2px 4px; border-radius: 4px; margin-top: 4px; cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .calendar-day { min-height: 95px; border: 1px solid var(--border); border-radius: 6px; padding: 6px; background: #fff; position: relative; }
+    .day-number { font-size: 0.85rem; font-weight: bold; color: #a0aec0; }
+    .log-badge { background: var(--primary-light); color: white; font-size: 0.8rem; padding: 3px 6px; border-radius: 4px; margin-top: 4px; cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; }
 
     /* 재관판 */
-    .stamp-board { background: white; padding: 1.5rem; border-radius: 12px; margin-top: 2rem; }
+    .stamp-board { background: white; padding: 1.5rem; border-radius: 12px; margin-top: 2rem; border: 1px solid var(--border); }
     .stamp-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1rem; }
-    .stamp { width: 45px; height: 45px; border-radius: 50%; border: 2px dashed var(--primary-light); display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--primary-light); font-size: 0.8rem; }
+    .stamp { width: 48px; height: 48px; border-radius: 50%; border: 2px dashed var(--primary-light); display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--primary-light); font-size: 0.85rem; }
     .stamp.active { background: var(--primary); color: white; border: 2px solid var(--primary); }
 
     /* 공연 DB 카드리스트 */
     .show-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
-    .show-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: flex; flex-direction: column; }
+    .show-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: flex; flex-direction: column; border: 1px solid var(--border); }
     .show-poster { width: 100%; height: 320px; object-fit: cover; background: #edf2f7; }
-    .show-info { padding: 1rem; flex-grow: 1; display: flex; flex-direction: column; }
-    .show-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem; }
-    .show-detail { font-size: 0.85rem; color: #4a5568; margin-bottom: 0.3rem; }
-    .show-actions { margin-top: auto; display: flex; gap: 0.5rem; padding-top: 1rem; }
+    .show-info { padding: 1.2rem; flex-grow: 1; display: flex; flex-direction: column; }
+    .show-title { font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem; color: #1a202c; }
+    .show-detail { font-size: 0.9rem; color: #4a5568; margin-bottom: 0.4rem; }
+    .show-actions { margin-top: auto; display: flex; flex-wrap: wrap; gap: 0.5rem; padding-top: 1rem; }
 
-    /* 캐스트 인물 카드 레이아웃 */
-    .role-section { margin-bottom: 1.5rem; background: #f8fafc; padding: 1rem; border-radius: 8px; border: 1px solid var(--border); }
-    .role-title { font-weight: bold; color: var(--primary); font-size: 1.05rem; margin-bottom: 0.8rem; border-bottom: 2px solid var(--primary-light); padding-bottom: 4px; display: inline-block; }
-    .actor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 1rem; }
-    .actor-card { text-align: center; background: white; padding: 8px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-    .actor-photo { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; background: #e2e8f0; margin-bottom: 6px; }
-    .actor-name { font-size: 0.85rem; font-weight: bold; color: var(--text); }
-
-    /* 캐스트 입력용 폼 Row */
-    .cast-input-row { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; background: #f7fafc; padding: 8px; border-radius: 6px; border: 1px solid var(--border); }
-    .cast-input-row input { flex: 1; padding: 0.4rem; font-size: 0.85rem; }
+    /* 회차별 스케줄 리스트 스타일 */
+    .schedule-item { background: #f8fafc; border: 1px solid var(--border); border-left: 4px solid var(--primary); padding: 0.8rem 1rem; border-radius: 6px; margin-bottom: 0.6rem; }
+    .schedule-time { font-weight: bold; color: var(--primary); font-size: 0.95rem; }
+    .schedule-cast { font-size: 0.9rem; color: #2d3748; margin-top: 2px; }
 
     /* 버튼 스타일 */
     .btn { padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 0.9rem; }
@@ -74,10 +67,11 @@
     /* 모달 팝업 */
     .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
     .modal.active { display: flex; }
-    .modal-content { background: white; padding: 2rem; border-radius: 12px; width: 90%; max-width: 650px; max-height: 90vh; overflow-y: auto; }
-    .form-group { margin-bottom: 1rem; }
-    .form-group label { display: block; font-weight: bold; margin-bottom: 0.3rem; font-size: 0.9rem; }
-    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.6rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; }
+    .modal-content { background: white; padding: 2rem; border-radius: 12px; width: 90%; max-width: 580px; max-height: 90vh; overflow-y: auto; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-weight: bold; margin-bottom: 0.4rem; font-size: 0.95rem; color: #2d3748; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.7rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; color: #2d3748; }
+    .form-group textarea { line-height: 1.5; }
   </style>
 </head>
 <body>
@@ -95,7 +89,7 @@
     <div id="mypage" class="tab-content active">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
         <h2>📊 관극 통계</h2>
-        <select id="yearFilter" onchange="renderMypage()" style="padding: 0.4rem 1rem; border-radius: 6px;">
+        <select id="yearFilter" onchange="renderMypage()" style="padding: 0.4rem 1rem; border-radius: 6px; font-weight:bold;">
           <option value="ALL">전체 연도 보기</option>
           <option value="2026" selected>2026년</option>
           <option value="2025">2025년</option>
@@ -114,12 +108,12 @@
         <div class="stat-card">
           <div>최다 관람 배우</div>
           <div class="stat-value" id="statTopActor">-</div>
-          <button class="btn btn-secondary" style="font-size:0.75rem; margin-top:5px;" onclick="showRankModal('actor')">전체 순위 보기</button>
+          <button class="btn btn-secondary" style="font-size:0.75rem; margin-top:6px;" onclick="showRankModal('actor')">전체 순위 보기</button>
         </div>
         <div class="stat-card">
           <div>최다 관람 작품</div>
           <div class="stat-value" id="statTopShow">-</div>
-          <button class="btn btn-secondary" style="font-size:0.75rem; margin-top:5px;" onclick="showRankModal('show')">전체 순위 보기</button>
+          <button class="btn btn-secondary" style="font-size:0.75rem; margin-top:6px;" onclick="showRankModal('show')">전체 순위 보기</button>
         </div>
       </div>
 
@@ -140,7 +134,7 @@
       <!-- 재관람 판 -->
       <div class="stamp-board">
         <h3>🎟️ 작품별 재관람 도장판</h3>
-        <select id="stampShowSelect" onchange="renderStampBoard()" style="margin: 1rem 0; padding: 0.5rem; width: 100%; border-radius: 6px;">
+        <select id="stampShowSelect" onchange="renderStampBoard()" style="margin: 1rem 0; padding: 0.6rem; width: 100%; border-radius: 6px; font-size: 0.95rem;">
         </select>
         <div class="stamp-grid" id="stampGrid"></div>
       </div>
@@ -162,16 +156,16 @@
     <div class="modal-content">
       <h3 id="logModalTitle" style="margin-bottom: 1rem;">관극 기록 추가</h3>
       <input type="hidden" id="logId">
-      <div class="form-group"><label>공연 이름</label><input type="text" id="logTitle" required></div>
+      <div class="form-group"><label>공연 이름</label><input type="text" id="logTitle" required placeholder="예: 아가사"></div>
       <div class="form-group"><label>관람 날짜 및 시간</label><input type="datetime-local" id="logDate" required></div>
-      <div class="form-group"><label>캐스트 (쉼표로 구분)</label><input type="text" id="logCast" placeholder="예: 최수진, 백은혜"></div>
-      <div class="form-group"><label>공연장</label><input type="text" id="logTheater"></div>
+      <div class="form-group"><label>당일 캐스트 (쉼표로 구분)</label><input type="text" id="logCast" placeholder="예: 최수진, 백은혜, 김재범"></div>
+      <div class="form-group"><label>공연장</label><input type="text" id="logTheater" placeholder="예: 대학로 예스24스테이지 1관"></div>
       <div class="form-group"><label>좌석 정보</label><input type="text" id="logSeat" placeholder="예: 1층 B구역 5열 12번"></div>
-      <div class="form-group"><label>티켓 금액 (원)</label><input type="number" id="logPrice" placeholder="100000"></div>
+      <div class="form-group"><label>티켓 금액 (원)</label><input type="number" id="logPrice" placeholder="66000"></div>
       <div class="form-group"><label>예매처</label><input type="text" id="logTicketOffice" placeholder="예: 인터파크, YES24"></div>
       <div class="form-group"><label>할인 권종</label><input type="text" id="logDiscount" placeholder="예: 재관람 할인 20%"></div>
       <div class="form-group"><label>이벤트 / 혜택</label><input type="text" id="logEvent" placeholder="예: 미니포토북 증정"></div>
-      <div class="form-group"><label>관극 후기 / 메모</label><textarea id="logReview" rows="4"></textarea></div>
+      <div class="form-group"><label>관극 후기 / 메모</label><textarea id="logReview" rows="4" placeholder="오늘 넘버와 배우님 연기가 완벽했다..."></textarea></div>
       
       <div style="display: flex; justify-content: flex-end; gap: 0.5rem;">
         <button class="btn btn-danger" id="btnDeleteLog" onclick="deleteLog()" style="display:none;">삭제</button>
@@ -181,55 +175,47 @@
     </div>
   </div>
 
-  <!-- 모달 2: 신규 공연 등록/수정 -->
+  <!-- 모달 2: 공연 등록 및 스케줄 수정 모달 -->
   <div class="modal" id="showModal">
     <div class="modal-content">
-      <h3 id="showModalTitle" style="margin-bottom: 1rem;">공연 DB 등록</h3>
+      <h3 id="showModalTitle" style="margin-bottom: 1rem;">공연 DB & 스케줄 등록/수정</h3>
       <input type="hidden" id="showId">
       <div class="form-group">
-        <label>공연 메인 포스터 이미지</label>
-        <input type="file" accept="image/*" onchange="handleMainPosterUpload(event)" style="margin-bottom:5px;">
-        <input type="text" id="showPosterUrl" placeholder="또는 이미지 URL 직접 입력">
+        <label>공연 포스터 첨부</label>
+        <input type="file" accept="image/*" onchange="handlePosterUpload(event)" style="margin-bottom:6px;">
+        <input type="text" id="showPosterUrl" placeholder="또는 이미지 인터넷 주소(URL) 입력">
       </div>
-      <div class="form-group"><label>작품명</label><input type="text" id="showTitle" required></div>
-      <div class="form-group"><label>공연장</label><input type="text" id="showTheater"></div>
-      <div class="form-group"><label>공연 기간</label><input type="text" id="showPeriod" placeholder="2026.12.01 ~ 2027.02.28"></div>
-      <div class="form-group"><label>공연 시간 (상세 스케줄)</label><input type="text" id="showTime" placeholder="예: 화-금 19:30 / 토, 일 14:00, 18:30"></div>
+      <div class="form-group"><label>작품명</label><input type="text" id="showTitle" placeholder="예: 뮤지컬 아가사" required></div>
+      <div class="form-group"><label>공연장</label><input type="text" id="showTheater" placeholder="예: 대학로 예스24스테이지"></div>
+      <div class="form-group"><label>공연 기간</label><input type="text" id="showPeriod" placeholder="예: 2026.12.01 ~ 2027.02.28"></div>
       
-      <!-- 배역 및 캐스트별 포스터 첨부 섹션 -->
       <div class="form-group">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-          <label style="margin:0;">🎭 배역별 출연진 & 배우 포스터 등록</label>
-          <button type="button" class="btn btn-secondary" style="font-size:0.75rem;" onclick="addCastInputRow()">+ 배우 추가</button>
-        </div>
-        <div id="castInputContainer"></div>
+        <label>🗓️ 회차별 상세 스케줄 (언제든지 수정 가능)</label>
+        <div style="font-size:0.85rem; color:#718096; margin-bottom:6px;">회차별 시간과 당일 캐스트를 한 줄에 하나씩 작성해 주세요.</div>
+        <textarea id="showScheduleText" rows="6" placeholder="예시:&#10;화 19:30 - 최수진, 김재범&#10;수 15:00 - 백은혜, 김경수&#10;목 19:30 - 최수진, 이정화"></textarea>
       </div>
       
       <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1rem;">
         <button class="btn btn-secondary" onclick="closeModal('showModal')">취소</button>
-        <button class="btn btn-primary" onclick="saveShow()">공연 저장</button>
+        <button class="btn btn-primary" onclick="saveShow()">저장하기</button>
       </div>
     </div>
   </div>
 
-  <!-- 모달 3: 공연 스케줄표 & 배역별 캐스팅 포스터 팝업 -->
+  <!-- 모달 3: 스케줄표 보기 팝업 -->
   <div class="modal" id="scheduleModal">
     <div class="modal-content">
-      <h3 id="scheduleModalTitle" style="margin-bottom: 1rem;">📅 공연 상세 스케줄 & 캐스팅</h3>
-      <div style="text-align: center; margin-bottom: 1rem;">
-        <img id="schedulePoster" src="" style="max-width: 180px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
+      <h3 id="scheduleModalTitle" style="margin-bottom: 1rem;">📅 공연 스케줄표</h3>
+      <div style="text-align: center; margin-bottom: 1.2rem;">
+        <img id="schedulePoster" src="" style="max-width: 170px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
       </div>
       <div class="form-group">
-        <label>공연 장소 & 기간</label>
-        <p id="scheduleVenuePeriod" style="background: #edf2f7; padding: 0.6rem; border-radius: 6px; font-size: 0.9rem;"></p>
+        <label>공연장 & 기간</label>
+        <p id="scheduleVenuePeriod" style="background: #edf2f7; padding: 0.7rem; border-radius: 6px; font-weight:500;"></p>
       </div>
       <div class="form-group">
-        <label>공연 시간</label>
-        <p id="scheduleTimeText" style="background: #edf2f7; padding: 0.6rem; border-radius: 6px; font-size: 0.9rem;"></p>
-      </div>
-      <div class="form-group">
-        <label>배역별 출연 캐스트</label>
-        <div id="scheduleCastContainer" style="margin-top: 0.5rem;"></div>
+        <label>회차별 당일 캐스팅 스케줄</label>
+        <div id="scheduleListContainer" style="margin-top:0.5rem;"></div>
       </div>
       <div style="display: flex; justify-content: flex-end;">
         <button class="btn btn-primary" onclick="closeModal('scheduleModal')">확인</button>
@@ -250,7 +236,7 @@
 
   <script>
     let logs = JSON.parse(localStorage.getItem('myLogs')) || [
-      { id: 1, title: "아가사", date: "2026-12-05T19:30", cast: "최수진, 김재범", theater: "대학로 예스24스테이지", seat: "1층 B구역 5열", price: 77000, ticketOffice: "인터파크", discount: "조기예매 20%", event: "포토카드", review: "몰입감 대박!" }
+      { id: 1, title: "아가사", date: "2026-12-05T19:30", cast: "최수진, 김재범", theater: "대학로 예스24스테이지", seat: "1층 B구역 5열", price: 77000, ticketOffice: "인터파크", discount: "조기예매 20%", event: "포토카드", review: "오늘 몰입감 대박!" }
     ];
 
     let shows = JSON.parse(localStorage.getItem('myShows')) || [
@@ -258,21 +244,15 @@
         id: 1, 
         title: "아가사", 
         poster: "https://via.placeholder.com/300x400?text=Agatha", 
-        theater: "대학로 예스24스테이지", 
+        theater: "대학로 예스24스테이지 1관", 
         period: "2026.12.01 ~ 2027.02.28", 
-        time: "화-금 19:30 / 토,일 14:00, 18:00", 
-        castList: [
-          { role: "아가사", actor: "최수진", photo: "https://via.placeholder.com/120x150?text=최수진" },
-          { role: "아가사", actor: "백은혜", photo: "https://via.placeholder.com/120x150?text=백은혜" },
-          { role: "아가사", actor: "이정화", photo: "https://via.placeholder.com/120x150?text=이정화" },
-          { role: "로이", actor: "김재범", photo: "https://via.placeholder.com/120x150?text=김재범" }
-        ]
+        scheduleText: "화 19:30 - 최수진, 김재범\n수 15:00 - 백은혜, 김경수\n목 19:30 - 최수진, 이정화\n토 14:00 - 백은혜, 김재범"
       }
     ];
 
     let currentYear = 2026;
     let currentMonth = 10;
-    let tempMainPoster = "";
+    let tempUploadedPoster = "";
 
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -283,11 +263,11 @@
       if(tabId === 'shows') renderShows();
     }
 
-    function handleMainPosterUpload(e) {
+    function handlePosterUpload(e) {
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = function(evt) { tempMainPoster = evt.target.result; };
+        reader.onload = function(evt) { tempUploadedPoster = evt.target.result; };
         reader.readAsDataURL(file);
       }
     }
@@ -385,78 +365,54 @@
             <div class="show-detail">📅 ${s.period || '기간 미정'}</div>
             <div class="show-actions">
               <button class="btn btn-secondary" style="font-size:0.8rem;" onclick="openScheduleModal(${s.id})">📅 스케줄표 보기</button>
-              <button class="btn btn-primary" style="font-size:0.8rem;" onclick="addShowToLog('${s.title}', '${s.theater}')">관극 추가</button>
+              <button class="btn btn-secondary" style="font-size:0.8rem;" onclick="openShowModal(${s.id})">✏️ 수정</button>
+              <button class="btn btn-primary" style="font-size:0.8rem; width:100%; margin-top:4px;" onclick="addShowToLog('${s.title}', '${s.theater}')">내 관극으로 추가</button>
             </div>
           </div>
         </div>
       `).join('');
     }
 
-    // 캐스팅 동적 폼 제어
-    function addCastInputRow(role = '', actor = '', photo = '') {
-      const container = document.getElementById('castInputContainer');
-      const rowId = 'cast_row_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
+    function openShowModal(id = null) {
+      tempUploadedPoster = "";
+      document.getElementById('showModal').classList.add('active');
       
-      const div = document.createElement('div');
-      div.className = 'cast-input-row';
-      div.id = rowId;
-      div.innerHTML = `
-        <input type="text" placeholder="배역명 (예: 아가사)" class="cast-role" value="${role}" style="flex:1;">
-        <input type="text" placeholder="배우명 (예: 최수진)" class="cast-actor" value="${actor}" style="flex:1;">
-        <input type="file" accept="image/*" class="cast-photo-file" style="flex:1.2; font-size:0.75rem;" onchange="handleActorPhotoUpload(event, '${rowId}')">
-        <input type="hidden" class="cast-photo-val" value="${photo}">
-        <button type="button" class="btn btn-danger" style="padding:0.3rem 0.6rem; font-size:0.75rem;" onclick="document.getElementById('${rowId}').remove()">X</button>
-      `;
-      container.appendChild(div);
-    }
-
-    function handleActorPhotoUpload(e, rowId) {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-          document.querySelector(`#${rowId} .cast-photo-val`).value = evt.target.result;
-        };
-        reader.readAsDataURL(file);
+      if(id) {
+        const show = shows.find(s => s.id === id);
+        document.getElementById('showModalTitle').innerText = "공연 DB & 스케줄 수정";
+        document.getElementById('showId').value = show.id;
+        document.getElementById('showTitle').value = show.title;
+        document.getElementById('showPosterUrl').value = show.poster.startsWith('data:') ? '' : show.poster;
+        document.getElementById('showTheater').value = show.theater;
+        document.getElementById('showPeriod').value = show.period;
+        document.getElementById('showScheduleText').value = show.scheduleText || '';
+      } else {
+        document.getElementById('showModalTitle').innerText = "공연 DB & 스케줄 신규 등록";
+        document.getElementById('showId').value = '';
+        document.querySelectorAll('#showModal input, #showModal textarea').forEach(i => i.value = '');
       }
     }
 
-    function openShowModal() {
-      tempMainPoster = "";
-      document.getElementById('showModal').classList.add('active');
-      document.querySelectorAll('#showModal input[type="text"]').forEach(i => i.value = '');
-      document.getElementById('castInputContainer').innerHTML = '';
-      // 기본 행 2개 생성
-      addCastInputRow("아가사", "최수진");
-      addCastInputRow("아가사", "백은혜");
-    }
-
     function saveShow() {
+      const id = document.getElementById('showId').value;
       const posterUrlInput = document.getElementById('showPosterUrl').value;
       
-      // 캐스트 입력 정보 수집
-      const castRows = document.querySelectorAll('.cast-input-row');
-      const castList = [];
-      castRows.forEach(row => {
-        const role = row.querySelector('.cast-role').value.trim();
-        const actor = row.querySelector('.cast-actor').value.trim();
-        const photo = row.querySelector('.cast-photo-val').value;
-        if(role && actor) {
-          castList.push({ role, actor, photo: photo || 'https://via.placeholder.com/120x150?text=' + encodeURIComponent(actor) });
-        }
-      });
-
       const showData = {
-        id: Date.now(),
+        id: id ? Number(id) : Date.now(),
         title: document.getElementById('showTitle').value,
-        poster: tempMainPoster || posterUrlInput || 'https://via.placeholder.com/300x400',
+        poster: tempUploadedPoster || posterUrlInput || 'https://via.placeholder.com/300x400',
         theater: document.getElementById('showTheater').value,
         period: document.getElementById('showPeriod').value,
-        time: document.getElementById('showTime').value,
-        castList: castList
+        scheduleText: document.getElementById('showScheduleText').value
       };
 
-      shows.push(showData);
+      if(id) {
+        const idx = shows.findIndex(s => s.id === Number(id));
+        shows[idx] = showData;
+      } else {
+        shows.push(showData);
+      }
+
       localStorage.setItem('myShows', JSON.stringify(shows));
       closeModal('showModal');
       renderShows();
@@ -464,41 +420,29 @@
 
     function openScheduleModal(showId) {
       const show = shows.find(s => s.id === showId);
-      document.getElementById('scheduleModalTitle').innerText = `${show.title} - 상세 스케줄`;
+      document.getElementById('scheduleModalTitle').innerText = `${show.title} - 스케줄표`;
       document.getElementById('schedulePoster').src = show.poster || 'https://via.placeholder.com/300x400';
       document.getElementById('scheduleVenuePeriod').innerText = `${show.theater || '미정'} (${show.period || '미정'})`;
-      document.getElementById('scheduleTimeText').innerText = show.time || '등록된 공연 시간 정보가 없습니다.';
       
-      const castContainer = document.getElementById('scheduleCastContainer');
-      castContainer.innerHTML = '';
+      const container = document.getElementById('scheduleListContainer');
+      container.innerHTML = '';
 
-      if (show.castList && show.castList.length > 0) {
-        // 배역별로 그룹화
-        const groupedRoles = {};
-        show.castList.forEach(c => {
-          if(!groupedRoles[c.role]) groupedRoles[c.role] = [];
-          groupedRoles[c.role].push(c);
-        });
+      if (show.scheduleText && show.scheduleText.trim() !== "") {
+        const lines = show.scheduleText.trim().split('\n');
+        lines.forEach(line => {
+          const parts = line.split('-');
+          const time = parts[0] ? parts[0].trim() : '';
+          const cast = parts[1] ? parts[1].trim() : '';
 
-        for (const [role, actors] of Object.entries(groupedRoles)) {
-          let roleHtml = `
-            <div class="role-section">
-              <div class="role-title">[${role}]</div>
-              <div class="actor-grid">
+          container.innerHTML += `
+            <div class="schedule-item">
+              <div class="schedule-time">⏰ ${time}</div>
+              <div class="schedule-cast">🎭 캐스트: ${cast || '정보 없음'}</div>
+            </div>
           `;
-          actors.forEach(a => {
-            roleHtml += `
-              <div class="actor-card">
-                <img class="actor-photo" src="${a.photo}" alt="${a.actor}">
-                <div class="actor-name">${a.actor}</div>
-              </div>
-            `;
-          });
-          roleHtml += `</div></div>`;
-          castContainer.innerHTML += roleHtml;
-        }
+        });
       } else {
-        castContainer.innerHTML = '<p style="color:#718096;">등록된 캐스팅 포스터 정보가 없습니다.</p>';
+        container.innerHTML = '<p style="color:#718096; padding: 1rem 0;">등록된 상세 스케줄이 없습니다.</p>';
       }
 
       document.getElementById('scheduleModal').classList.add('active');
@@ -601,1176 +545,5 @@
     // 초기 실행
     renderMypage();
   </script>
-</body>
-</html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlayLog - 나만의 관극 다이어리 & 티켓북</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts (Noto Sans KR) -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#f5f3ff',
-                            100: '#ede9fe',
-                            500: '#8b5cf6',
-                            600: '#7c3aed',
-                            700: '#6d28d9',
-                            900: '#4c1d95',
-                        },
-                        theater: '#181825',
-                        cardBg: '#212130'
-                    },
-                    fontFamily: {
-                        sans: ['Noto Sans KR', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            background-color: #0f0f17;
-            color: #e2e8f0;
-        }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #181825;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #4c1d95;
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #7c3aed;
-        }
-        .stamp-card {
-            background: radial-gradient(circle at center, rgba(124, 58, 237, 0.15) 0%, rgba(24, 24, 37, 0.8) 100%);
-        }
-    </style>
-</head>
-<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-brand-500 selection:text-white">
-
-    <!-- HEADER / NAVIGATION -->
-    <header class="bg-theater/90 backdrop-blur border-b border-purple-900/40 sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo -->
-                <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('mypage')">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-purple-400 flex items-center justify-center text-white text-xl shadow-lg shadow-purple-900/50">
-                        <i class="fa-solid fa-masks-theater"></i>
-                    </div>
-                    <div>
-                        <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-200 to-brand-500">PlayLog</span>
-                        <span class="text-xs block text-gray-400 -mt-1 font-light">나만의 관극 다이어리</span>
-                    </div>
-                </div>
-
-                <!-- Desktop Navigation Tabs -->
-                <nav class="hidden md:flex space-x-2">
-                    <button id="nav-mypage" onclick="switchTab('mypage')" class="px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 bg-brand-600 text-white shadow-md shadow-brand-600/30">
-                        <i class="fa-regular fa-calendar-days"></i> 마이페이지
-                    </button>
-                    <button id="nav-stats" onclick="switchTab('stats')" class="px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 text-gray-300 hover:text-white hover:bg-purple-900/30">
-                        <i class="fa-solid fa-chart-pie"></i> 통계 & 재관판
-                    </button>
-                    <button id="nav-shows" onclick="switchTab('shows')" class="px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 text-gray-300 hover:text-white hover:bg-purple-900/30">
-                        <i class="fa-solid fa-compact-disc"></i> 공연 DB
-                    </button>
-                </nav>
-
-                <!-- Quick Log Add Button -->
-                <div>
-                    <button onclick="openLogModal()" class="bg-gradient-to-r from-brand-600 to-purple-600 hover:from-brand-500 hover:to-purple-500 text-white px-4 py-2 rounded-xl text-sm font-medium transition flex items-center gap-2 shadow-lg shadow-purple-900/40 border border-purple-400/30">
-                        <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">관극 기록 등록</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Nav Bar -->
-        <div class="md:hidden flex border-t border-purple-900/30 bg-theater/95">
-            <button id="mobile-nav-mypage" onclick="switchTab('mypage')" class="flex-1 py-3 text-xs text-center text-brand-500 font-semibold border-b-2 border-brand-500">
-                <i class="fa-regular fa-calendar-days text-base block mb-0.5"></i> 마이페이지
-            </button>
-            <button id="mobile-nav-stats" onclick="switchTab('stats')" class="flex-1 py-3 text-xs text-center text-gray-400">
-                <i class="fa-solid fa-chart-pie text-base block mb-0.5"></i> 통계/재관판
-            </button>
-            <button id="mobile-nav-shows" onclick="switchTab('shows')" class="flex-1 py-3 text-xs text-center text-gray-400">
-                <i class="fa-solid fa-compact-disc text-base block mb-0.5"></i> 공연 DB
-            </button>
-        </div>
-    </header>
-
-    <!-- MAIN CONTAINER -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
-
-        <!-- TAB 1: 마이페이지 (캘린더 & 일정) -->
-        <section id="tab-mypage" class="space-y-6">
-            <!-- Calendar Header Control -->
-            <div class="bg-cardBg rounded-2xl p-4 sm:p-6 border border-purple-900/30 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div class="flex items-center gap-3">
-                    <button onclick="changeMonth(-1)" class="w-10 h-10 rounded-xl bg-purple-900/30 hover:bg-purple-800/50 flex items-center justify-center text-purple-200 transition">
-                        <i class="fa-solid fa-chevron-left"></i>
-                    </button>
-                    <h2 id="calendar-month-year" class="text-xl sm:text-2xl font-bold text-white tracking-wide">2026년 3월</h2>
-                    <button onclick="changeMonth(1)" class="w-10 h-10 rounded-xl bg-purple-900/30 hover:bg-purple-800/50 flex items-center justify-center text-purple-200 transition">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-                </div>
-                <div class="flex items-center gap-2">
-                    <button onclick="goToToday()" class="px-3 py-1.5 rounded-lg bg-purple-900/40 text-purple-300 text-xs font-medium hover:bg-purple-800/60 transition">
-                        오늘로 이동
-                    </button>
-                    <span id="monthly-log-count" class="px-3 py-1.5 rounded-lg bg-brand-900/60 border border-brand-500/40 text-brand-300 text-xs font-medium">
-                        이번 달 관극: 0회
-                    </span>
-                </div>
-            </div>
-
-            <!-- Calendar Grid -->
-            <div class="bg-cardBg rounded-2xl p-3 sm:p-6 border border-purple-900/30 shadow-xl overflow-hidden">
-                <!-- Day of week header -->
-                <div class="grid grid-cols-7 gap-1 sm:gap-2 text-center mb-2 font-semibold text-xs sm:text-sm text-gray-400 pb-2 border-b border-purple-900/30">
-                    <div class="text-rose-400">일</div>
-                    <div>월</div>
-                    <div>화</div>
-                    <div>수</div>
-                    <div>목</div>
-                    <div>금</div>
-                    <div class="text-indigo-400">토</div>
-                </div>
-                <!-- Dates Grid -->
-                <div id="calendar-grid" class="grid grid-cols-7 gap-1 sm:gap-2 auto-rows-fr">
-                    <!-- Calendar cells generated via JS -->
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 2: 관극 통계 & 재관판 -->
-        <section id="tab-stats" class="space-y-6 hidden">
-            <!-- Year Selector Header -->
-            <div class="bg-cardBg rounded-2xl p-4 sm:p-6 border border-purple-900/30 shadow-xl flex flex-wrap items-center justify-between gap-4">
-                <div>
-                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-chart-line text-brand-500"></i> 관극 통계 & 분석
-                    </h2>
-                    <p class="text-xs text-gray-400 mt-1">내가 본 연도별 관극 내역과 최다 관람 랭킹을 확인하세요.</p>
-                </div>
-                <div class="flex items-center gap-2">
-                    <label for="stats-year-select" class="text-sm font-medium text-gray-300">조회 연도:</label>
-                    <select id="stats-year-select" onchange="renderStats()" class="bg-purple-950 border border-purple-800/60 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
-                        <option value="ALL">전체 연도</option>
-                        <option value="2026" selected>2026년</option>
-                        <option value="2025">2025년</option>
-                        <option value="2024">2024년</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Summary KPI Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="bg-cardBg border border-purple-900/40 rounded-2xl p-5 shadow-lg flex items-center justify-between">
-                    <div>
-                        <p class="text-xs text-gray-400 font-medium">총 관극 횟수</p>
-                        <h3 id="stat-total-count" class="text-2xl sm:text-3xl font-extrabold text-white mt-1">0회</h3>
-                    </div>
-                    <div class="w-12 h-12 rounded-xl bg-purple-900/40 text-brand-400 flex items-center justify-center text-xl">
-                        <i class="fa-solid fa-ticket"></i>
-                    </div>
-                </div>
-
-                <div class="bg-cardBg border border-purple-900/40 rounded-2xl p-5 shadow-lg flex items-center justify-between">
-                    <div>
-                        <p class="text-xs text-gray-400 font-medium">총 누적 관극 금액</p>
-                        <h3 id="stat-total-spend" class="text-2xl sm:text-3xl font-extrabold text-brand-300 mt-1">0원</h3>
-                    </div>
-                    <div class="w-12 h-12 rounded-xl bg-purple-900/40 text-emerald-400 flex items-center justify-center text-xl">
-                        <i class="fa-solid fa-coins"></i>
-                    </div>
-                </div>
-
-                <div class="bg-cardBg border border-purple-900/40 rounded-2xl p-5 shadow-lg flex items-center justify-between sm:col-span-2 lg:col-span-1">
-                    <div>
-                        <p class="text-xs text-gray-400 font-medium">가장 자주 방문한 공연장</p>
-                        <h3 id="stat-top-venue" class="text-xl font-bold text-white mt-1 truncate max-w-[200px]">-</h3>
-                    </div>
-                    <div class="w-12 h-12 rounded-xl bg-purple-900/40 text-amber-400 flex items-center justify-center text-xl">
-                        <i class="fa-solid fa-location-dot"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Ranking Sections (Actors & Shows) -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- Top Actors -->
-                <div class="bg-cardBg border border-purple-900/30 rounded-2xl p-6 shadow-xl flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-4 pb-3 border-b border-purple-900/30">
-                            <h3 class="font-bold text-lg text-white flex items-center gap-2">
-                                <i class="fa-solid fa-user-astronaut text-amber-400"></i> 최다 관람 배우
-                            </h3>
-                            <button onclick="openFullRankingModal('actors')" class="text-xs text-brand-400 hover:text-brand-300 font-medium flex items-center gap-1">
-                                전체 순위 보기 <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                            </button>
-                        </div>
-                        <div id="top-actors-list" class="space-y-3">
-                            <!-- Top 3 Actors inserted here -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Top Shows -->
-                <div class="bg-cardBg border border-purple-900/30 rounded-2xl p-6 shadow-xl flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-4 pb-3 border-b border-purple-900/30">
-                            <h3 class="font-bold text-lg text-white flex items-center gap-2">
-                                <i class="fa-solid fa-crown text-purple-400"></i> 최다 관람 작품
-                            </h3>
-                            <button onclick="openFullRankingModal('shows')" class="text-xs text-brand-400 hover:text-brand-300 font-medium flex items-center gap-1">
-                                전체 순위 보기 <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                            </button>
-                        </div>
-                        <div id="top-shows-list" class="space-y-3">
-                            <!-- Top 3 Shows inserted here -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Stamp Board (재관판) -->
-            <div class="bg-cardBg border border-purple-900/30 rounded-2xl p-6 shadow-xl space-y-4">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-purple-900/30">
-                    <div>
-                        <h3 class="font-bold text-lg text-white flex items-center gap-2">
-                            <i class="fa-solid fa-stamp text-rose-400"></i> 디지털 재관람 도장판 (재관판)
-                        </h3>
-                        <p class="text-xs text-gray-400 mt-0.5">선택한 연도의 관극 기록이 도장으로 차곡차곡 찍힙니다.</p>
-                    </div>
-                    <span id="stamp-count-badge" class="px-3 py-1 rounded-full bg-rose-900/30 border border-rose-500/30 text-rose-300 text-xs self-start sm:self-auto font-medium">
-                        도장 0개 획득
-                    </span>
-                </div>
-
-                <!-- Stamp Grid -->
-                <div id="stamp-board-grid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 pt-2">
-                    <!-- Stamps generated via JS -->
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 3: 공연 DB (검색 & 등록) -->
-        <section id="tab-shows" class="space-y-6 hidden">
-            <!-- Header & Search & Add Show Button -->
-            <div class="bg-cardBg rounded-2xl p-4 sm:p-6 border border-purple-900/30 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div>
-                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-database text-brand-400"></i> 공연 DB & 스케줄
-                    </h2>
-                    <p class="text-xs text-gray-400 mt-1">등록된 공연 스케줄을 확인하고, 내 관극 기록으로 빠르게 등록하세요.</p>
-                </div>
-                <div class="flex flex-col sm:flex-row items-center gap-3">
-                    <!-- Search input -->
-                    <div class="relative w-full sm:w-64">
-                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-                        <input type="text" id="show-search-input" onkeyup="filterShows()" placeholder="공연명, 공연장, 캐스트 검색..." class="w-full bg-purple-950/70 border border-purple-800/60 rounded-xl pl-9 pr-4 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-500">
-                    </div>
-                    <button onclick="openNewShowModal()" class="w-full sm:w-auto bg-purple-800 hover:bg-purple-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-plus"></i> 새 공연 등록
-                    </button>
-                </div>
-            </div>
-
-            <!-- Show Cards Grid -->
-            <div id="shows-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Show cards dynamically generated -->
-            </div>
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="border-t border-purple-900/30 bg-theater py-6 mt-12 text-center text-xs text-gray-500">
-        <div class="max-w-7xl mx-auto px-4">
-            <p>© 2026 PlayLog. All rights reserved. 나만의 소중한 관극 일상을 기록하세요.</p>
-        </div>
-    </footer>
-
-
-    <!-- MODALS -->
-
-    <!-- 1. 관극 기록 추가/수정 모달 -->
-    <div id="log-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-cardBg border border-purple-800/50 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div class="p-6 border-b border-purple-900/40 flex items-center justify-between sticky top-0 bg-cardBg z-10">
-                <h3 id="log-modal-title" class="text-lg font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-pen-to-square text-brand-400"></i> 관극 기록 작성
-                </h3>
-                <button onclick="closeLogModal()" class="text-gray-400 hover:text-white text-xl">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <form id="log-form" onsubmit="savePlayLog(event)" class="p-6 space-y-4">
-                <input type="hidden" id="log-id">
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <!-- 공연 이름 -->
-                    <div class="sm:col-span-2">
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">공연 이름 <span class="text-rose-400">*</span></label>
-                        <input type="text" id="log-title" required placeholder="예: 뮤지컬 드라큘라" class="w-full bg-purple-950/60 border border-purple-800/60 rounded-xl px-3.5 py-2 text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                    </div>
-
-                    <!-- 날짜 및 시간 -->
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">관람 날짜 <span class="text-rose-400">*</span></label>
-                        <input type="date" id="log-date" required class="w-full bg-purple-950/60 border border-purple-800/60 rounded-xl px-3.5 py-2 text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">공연 시간</label>
-                        <input type="text" id="log-time" placeholder="예: 14:00 (낮공)" class="w-full bg-purple-950/60 border border-purple-800/60 rounded-xl px-3.5 py-2 text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                    </div>
-
-                    <!-- 공연장 & 좌석 -->
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">공연장</label>
-                        <input type="text" id="log-venue" placeholder="예: 샤롯데씨어터" class="w-full bg-purple-950/60 border border-purple-800/60 rounded-xl px-3.5 py-2 text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">좌석 정보</label>
-                        <input type="text" id="log-seat" placeholder="예: 1층 B구역 5열 12번" class="w-full bg-purple-950/60 border border-purple-800/60 rounded-xl px-3.5 py-2 text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                    </div>
-
-                    <!-- 캐스트 -->
-                    <div class="sm:col-span-2">
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">캐스트 (쉼표로 구분)</label>
-                        <input type="text" id="log-cast" placeholder="예: 김준수, 정선아, 손준호" class="w-full bg-purple-950/60 border border-purple-800/60 rounded-xl px-3.5 py-2 text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                    </div>
-
-                    <!-- 금액 & 예매처 -->
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">티켓 금액 (원)</label>
-                        <input type="number" id="log-price" placeholder="예: 150000" class="w-full bg-purple-950/60 border border-purple-800/60 rounded-xl px-3.5 py-2 text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">예매처</label>
-                        <input type="text" id="log-agency" placeholder="예: 인터파크, 예스24" class="w-full bg-purple-950/60 border border-purple-800/60 rounded-xl px-3.5 py-2 text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                    </div>
-
-                    <!-- 할인권종 & 이벤트 -->
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">할인 권종</label>
-                        <input type="text" id="log-discount" placeholder="예: 재관람 할인 20%" class="w-full bg-purple-950/60 border border-purple-800/60 rounded-xl px-3.5 py-2 text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">이벤트 / 증정품</label>
-                        <input type="text" id="log-event" placeholder="예: 커튼콜 데이, 미니포토북 증정" class="w-full bg-purple-950/60 border border-purple-800/60 rounded-xl px-3.5 py-2 text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                    </div>
-
-                    <!-- 관극 후기 -->
-                    <div class="sm:col-span-2">
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">관극 후기 및 메모</label>
-                        <textarea id="log-review" rows="4" placeholder="오늘 배우님 감정선 미쳤음... 레전 찍은 날!" class="w-full bg-purple-950/60 border border-purple-800/60 rounded-xl px-3.5 py-2 text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none"></textarea>
-                    </div>
-                </div>
-
-                <div class="pt-4 border-t border-purple-900/40 flex justify-end gap-3">
-                    <button type="button" onclick="closeLogModal()" class="px-4 py-2 rounded-xl text-sm font-medium text-gray-400 hover:text-white hover:bg-purple-900/30 transition">취소</button>
-                    <button type="submit" class="px-5 py-2 rounded-xl text-sm font-medium bg-brand-600 hover:bg-brand-500 text-white shadow-lg shadow-purple-900/50 transition">저장하기</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- 2. 관극 상세 보기 모달 -->
-    <div id="detail-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-cardBg border border-purple-800/50 rounded-2xl w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div class="p-6 border-b border-purple-900/40 flex items-center justify-between sticky top-0 bg-cardBg z-10">
-                <div class="flex items-center gap-2">
-                    <span class="px-2.5 py-1 rounded-md bg-purple-900/50 border border-purple-700/50 text-xs text-brand-300 font-semibold" id="detail-date-badge">2026-03-15</span>
-                    <h3 id="detail-title" class="text-lg font-bold text-white">뮤지컬 드라큘라</h3>
-                </div>
-                <button onclick="closeDetailModal()" class="text-gray-400 hover:text-white text-xl">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <div class="p-6 space-y-5">
-                <!-- Main Info Card -->
-                <div class="bg-purple-950/40 rounded-xl p-4 border border-purple-900/40 space-y-2 text-sm">
-                    <div class="flex items-center gap-2 text-gray-300">
-                        <i class="fa-regular fa-clock w-5 text-brand-400 text-center"></i>
-                        <span id="detail-time">19:30</span>
-                    </div>
-                    <div class="flex items-center gap-2 text-gray-300">
-                        <i class="fa-solid fa-location-dot w-5 text-rose-400 text-center"></i>
-                        <span id="detail-venue">샤롯데씨어터</span>
-                        <span class="text-gray-600">|</span>
-                        <span id="detail-seat" class="text-purple-300 font-medium">1층 B구역 5열 12번</span>
-                    </div>
-                    <div class="flex items-start gap-2 text-gray-300 pt-1">
-                        <i class="fa-solid fa-users w-5 text-amber-400 text-center mt-0.5"></i>
-                        <div id="detail-cast-tags" class="flex flex-wrap gap-1.5">
-                            <!-- Cast tags -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Financial & Ticket Info -->
-                <div class="grid grid-cols-2 gap-3 text-xs">
-                    <div class="bg-purple-900/20 p-3 rounded-xl border border-purple-900/30">
-                        <span class="text-gray-400 block mb-0.5">결제 금액 / 예매처</span>
-                        <span id="detail-price-agency" class="font-bold text-white text-sm">150,000원 (인터파크)</span>
-                    </div>
-                    <div class="bg-purple-900/20 p-3 rounded-xl border border-purple-900/30">
-                        <span class="text-gray-400 block mb-0.5">할인 / 이벤트</span>
-                        <span id="detail-discount-event" class="font-medium text-purple-200">재관람 20% / 포토카드</span>
-                    </div>
-                </div>
-
-                <!-- Review Section -->
-                <div>
-                    <h4 class="text-xs font-semibold text-gray-400 mb-2 flex items-center gap-1.5">
-                        <i class="fa-solid fa-quote-left text-brand-400"></i> 관극 후기 & 메모
-                    </h4>
-                    <div id="detail-review" class="bg-purple-950/60 p-4 rounded-xl border border-purple-900/40 text-sm text-gray-200 leading-relaxed whitespace-pre-line min-h-[100px]">
-                        후기가 없습니다.
-                    </div>
-                </div>
-            </div>
-
-            <!-- Action buttons -->
-            <div class="p-4 bg-purple-950/30 border-t border-purple-900/40 flex justify-between items-center">
-                <button id="detail-delete-btn" onclick="deleteCurrentLog()" class="px-3.5 py-2 rounded-xl text-xs font-medium text-rose-400 hover:bg-rose-950/50 transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-trash"></i> 삭제
-                </button>
-                <div class="flex gap-2">
-                    <button id="detail-edit-btn" onclick="editCurrentLog()" class="px-4 py-2 rounded-xl text-xs font-medium bg-purple-800 hover:bg-purple-700 text-white transition flex items-center gap-1.5">
-                        <i class="fa-solid fa-pen"></i> 수정
-                    </button>
-                    <button onclick="closeDetailModal()" class="px-4 py-2 rounded-xl text-xs font-medium bg-gray-800 hover:bg-gray-700 text-white transition">
-                        닫기
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 3. 전체 랭킹 (배우/작품) 팝업 모달 -->
-    <div id="ranking-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-cardBg border border-purple-800/50 rounded-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto shadow-2xl">
-            <div class="p-5 border-b border-purple-900/40 flex items-center justify-between sticky top-0 bg-cardBg z-10">
-                <h3 id="ranking-modal-title" class="text-lg font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-trophy text-amber-400"></i> 전체 랭킹 순위
-                </h3>
-                <button onclick="closeRankingModal()" class="text-gray-400 hover:text-white text-xl">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <div class="p-6">
-                <div id="ranking-modal-list" class="space-y-2.5">
-                    <!-- Full ranking list dynamically populated -->
-                </div>
-            </div>
-
-            <div class="p-4 border-t border-purple-900/40 flex justify-end">
-                <button onclick="closeRankingModal()" class="px-4 py-2 rounded-xl text-xs font-medium bg-gray-800 hover:bg-gray-700 text-white">
-                    닫기
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 4. 새 공연 DB 등록 모달 -->
-    <div id="new-show-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-cardBg border border-purple-800/50 rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div class="p-6 border-b border-purple-900/40 flex items-center justify-between sticky top-0 bg-cardBg z-10">
-                <h3 class="text-lg font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-folder-plus text-brand-400"></i> 새 공연 DB 등록
-                </h3>
-                <button onclick="closeNewShowModal()" class="text-gray-400 hover:text-white text-xl">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <form onsubmit="saveNewShow(event)" class="p-6 space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">공연 제목 <span class="text-rose-400">*</span></label>
-                    <input type="text" id="show-title-input" required placeholder="예: 뮤지컬 프랑켄슈타인" class="w-full bg-purple-950/60 border border-purple-800/60 rounded-xl px-3.5 py-2 text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">공연장</label>
-                    <input type="text" id="show-venue-input" placeholder="예: 블루스퀘어 신한카드홀" class="w-full bg-purple-950/60 border border-purple-800/60 rounded-xl px-3.5 py-2 text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">공연 기간</label>
-                    <input type="text" id="show-period-input" placeholder="예: 2026.05.01 ~ 2026.08.25" class="w-full bg-purple-950/60 border border-purple-800/60 rounded-xl px-3.5 py-2 text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">출연진 (캐스트 목록)</label>
-                    <input type="text" id="show-cast-input" placeholder="예: 유준상, 민우혁, 박은태, 카이" class="w-full bg-purple-950/60 border border-purple-800/60 rounded-xl px-3.5 py-2 text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">포스터 이미지 URL</label>
-                    <input type="url" id="show-poster-input" placeholder="https://example.com/poster.jpg (비워두면 기본 이미지)" class="w-full bg-purple-950/60 border border-purple-800/60 rounded-xl px-3.5 py-2 text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                </div>
-
-                <div class="pt-4 border-t border-purple-900/40 flex justify-end gap-3">
-                    <button type="button" onclick="closeNewShowModal()" class="px-4 py-2 rounded-xl text-sm font-medium text-gray-400 hover:text-white">취소</button>
-                    <button type="submit" class="px-5 py-2 rounded-xl text-sm font-medium bg-brand-600 hover:bg-brand-500 text-white shadow-lg shadow-purple-900/50">등록하기</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        // --- DATA STATE ---
-        let playLogs = [];
-        let showDb = [];
-
-        let currentYear = 2026;
-        let currentMonth = 2; // 0-indexed: 2 is March
-        let activeLogId = null;
-
-        // Initial Sample Data Generator
-        const sampleLogs = [
-            {
-                id: "log-1",
-                title: "뮤지컬 드라큘라",
-                date: "2026-03-05",
-                time: "19:30",
-                venue: "샤롯데씨어터",
-                seat: "1층 B구역 6열 14번",
-                cast: "김준수, 정선아, 손준호",
-                price: 160000,
-                agency: "인터파크",
-                discount: "재관람 할인 20%",
-                event: "포토카드 증정",
-                review: "샤드라큘라 샤우팅에 소름 돋음... 프레시 블러드 넘버에서 카메라 앵글이랑 조명 연출이 역대급이었다!"
-            },
-            {
-                id: "log-2",
-                title: "뮤지컬 드라큘라",
-                date: "2026-03-14",
-                time: "14:00 (낮공)",
-                venue: "샤롯데씨어터",
-                seat: "1층 A구역 3열 8번",
-                cast: "전동석, 임혜영, 손준호",
-                price: 160000,
-                agency: "예스24",
-                discount: "조기예매 10%",
-                event: "커튼콜 데이 (촬영 가능)",
-                review: "동드라 디테일 장인 ㅠㅠ 미나 바라볼 때 눈빛 연기 어쩔거야... 커튼콜 렌즈 챙겨가길 정말 잘했음."
-            },
-            {
-                id: "log-3",
-                title: "뮤지컬 프랑켄슈타인",
-                date: "2026-03-21",
-                time: "19:00",
-                venue: "블루스퀘어 신한카드홀",
-                seat: "1층 VIP석 9열 22번",
-                cast: "유준상, 박은태, 해나",
-                price: 170000,
-                agency: "인터파크",
-                discount: "일반예매",
-                event: "프로그램북 증정",
-                review: "은괴 너의 꿈 속에서 넘버 때 눈물 왈칵 쏟음. 앙상블 합도 너무 좋고 괴물 음색 완벽했음."
-            },
-            {
-                id: "log-4",
-                title: "뮤지컬 렌트",
-                date: "2026-02-18",
-                time: "19:30",
-                venue: "coex 신한카드 artium",
-                seat: "1층 OP석 2열 10번",
-                cast: "장지후, 정원영, 아이비",
-                price: 140000,
-                agency: "멜론티켓",
-                discount: "마티네 할인",
-                event: "-",
-                review: "Seasons of Love 들으러 가는 공연. OP석이라 배우들 호흡 소리까지 들림!"
-            },
-            {
-                id: "log-5",
-                title: "뮤지컬 프랑켄슈타인",
-                date: "2025-11-12",
-                time: "19:30",
-                venue: "블루스퀘어 신한카드홀",
-                seat: "1층 11열 15번",
-                cast: "민우혁, 카이, 이봄소리",
-                price: 150000,
-                agency: "인터파크",
-                discount: "재관람 20%",
-                event: "재관람 도장 2배 적립",
-                review: "카괴 멘탈 터지는 연기 최고..."
-            }
-        ];
-
-        const sampleShows = [
-            {
-                id: "show-1",
-                title: "뮤지컬 드라큘라",
-                venue: "샤롯데씨어터",
-                period: "2026.02.01 ~ 2026.05.15",
-                cast: "김준수, 전동석, 신성록, 정선아, 임혜영, 손준호",
-                poster: "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=500&auto=format&fit=crop&q=80"
-            },
-            {
-                id: "show-2",
-                title: "뮤지컬 프랑켄슈타인",
-                venue: "블루스퀘어 신한카드홀",
-                period: "2026.03.10 ~ 2026.06.30",
-                cast: "유준상, 민우혁, 박은태, 카이, 해나, 이봄소리",
-                poster: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500&auto=format&fit=crop&q=80"
-            },
-            {
-                id: "show-3",
-                title: "뮤지컬 렌트",
-                venue: "coex 신한카드 artium",
-                period: "2026.01.10 ~ 2026.03.31",
-                cast: "장지후, 백형훈, 정원영, 아이비, 김수하",
-                poster: "https://images.unsplash.com/photo-1469488865564-c2de10f69f96?w=500&auto=format&fit=crop&q=80"
-            },
-            {
-                id: "show-4",
-                title: "연극 킬롤로지",
-                venue: "대학로 아트원씨어터 2관",
-                period: "2026.04.01 ~ 2026.06.15",
-                cast: "오용, 김수현, 윤나무, 이석준",
-                poster: "https://images.unsplash.com/photo-1503095396549-807759245b35?w=500&auto=format&fit=crop&q=80"
-            }
-        ];
-
-        // --- LIFECYCLE INITIALIZATION ---
-        window.onload = function() {
-            loadFromLocalStorage();
-            renderCalendar();
-            renderStats();
-            renderShowsGrid();
-        };
-
-        function loadFromLocalStorage() {
-            const savedLogs = localStorage.getItem('playlogs_data');
-            const savedShows = localStorage.getItem('shows_db_data');
-
-            if (savedLogs) {
-                playLogs = JSON.parse(savedLogs);
-            } else {
-                playLogs = sampleLogs;
-                saveLogsToStorage();
-            }
-
-            if (savedShows) {
-                showDb = JSON.parse(savedShows);
-            } else {
-                showDb = sampleShows;
-                saveShowsToStorage();
-            }
-        }
-
-        function saveLogsToStorage() {
-            localStorage.setItem('playlogs_data', JSON.stringify(playLogs));
-        }
-
-        function saveShowsToStorage() {
-            localStorage.setItem('shows_db_data', JSON.stringify(showDb));
-        }
-
-        // --- NAVIGATION TABS ---
-        function switchTab(tabName) {
-            // Hide all tabs
-            document.getElementById('tab-mypage').classList.add('hidden');
-            document.getElementById('tab-stats').classList.add('hidden');
-            document.getElementById('tab-shows').classList.add('hidden');
-
-            // Reset Desktop Nav styles
-            const navs = ['mypage', 'stats', 'shows'];
-            navs.forEach(t => {
-                const btn = document.getElementById(`nav-${t}`);
-                const mobileBtn = document.getElementById(`mobile-nav-${t}`);
-                btn.className = "px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 text-gray-300 hover:text-white hover:bg-purple-900/30";
-                mobileBtn.className = "flex-1 py-3 text-xs text-center text-gray-400";
-            });
-
-            // Highlight Active
-            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
-            const activeBtn = document.getElementById(`nav-${tabName}`);
-            activeBtn.className = "px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 bg-brand-600 text-white shadow-md shadow-brand-600/30";
-
-            const activeMobileBtn = document.getElementById(`mobile-nav-${tabName}`);
-            activeMobileBtn.className = "flex-1 py-3 text-xs text-center text-brand-500 font-semibold border-b-2 border-brand-500";
-
-            // Trigger re-renders if necessary
-            if (tabName === 'stats') renderStats();
-            if (tabName === 'mypage') renderCalendar();
-            if (tabName === 'shows') renderShowsGrid();
-        }
-
-
-        // --- TAB 1: CALENDAR RENDERER ---
-        function changeMonth(delta) {
-            currentMonth += delta;
-            if (currentMonth < 0) {
-                currentMonth = 11;
-                currentYear--;
-            } else if (currentMonth > 11) {
-                currentMonth = 0;
-                currentYear++;
-            }
-            renderCalendar();
-        }
-
-        function goToToday() {
-            const today = new Date();
-            currentYear = today.getFullYear();
-            currentMonth = today.getMonth();
-            renderCalendar();
-        }
-
-        function renderCalendar() {
-            const monthYearText = `${currentYear}년 ${currentMonth + 1}월`;
-            document.getElementById('calendar-month-year').innerText = monthYearText;
-
-            const grid = document.getElementById('calendar-grid');
-            grid.innerHTML = '';
-
-            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
-            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-
-            // Count logs for this month
-            const currentMonthPrefix = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}`;
-            const monthlyLogs = playLogs.filter(log => log.date.startsWith(currentMonthPrefix));
-            document.getElementById('monthly-log-count').innerText = `이번 달 관극: ${monthlyLogs.length}회`;
-
-            // Blank padding for days before month start
-            for (let i = 0; i < firstDay; i++) {
-                const emptyCell = document.createElement('div');
-                emptyCell.className = 'min-h-[90px] sm:min-h-[110px] bg-purple-950/10 rounded-xl border border-purple-900/10 opacity-30';
-                grid.appendChild(emptyCell);
-            }
-
-            const todayStr = new Date().toISOString().split('T')[0];
-
-            // Render Days
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                const isToday = (dateStr === todayStr);
-
-                // Logs on this date
-                const dayLogs = playLogs.filter(log => log.date === dateStr);
-
-                const dayCell = document.createElement('div');
-                dayCell.className = `min-h-[90px] sm:min-h-[110px] bg-purple-950/40 rounded-xl border ${isToday ? 'border-brand-500 ring-1 ring-brand-500' : 'border-purple-900/30'} p-1.5 flex flex-col justify-between hover:border-purple-600 transition`;
-
-                // Top Date Number Header
-                const dateNum = document.createElement('div');
-                dateNum.className = `text-xs font-semibold px-1 py-0.5 rounded-md inline-block w-max ${isToday ? 'bg-brand-600 text-white' : 'text-gray-300'}`;
-                dateNum.innerText = day;
-                dayCell.appendChild(dateNum);
-
-                // Log Title Pills Container
-                const logsContainer = document.createElement('div');
-                logsContainer.className = 'space-y-1 my-1 overflow-y-auto max-h-[70px]';
-
-                dayLogs.forEach(log => {
-                    const logItem = document.createElement('button');
-                    logItem.onclick = (e) => {
-                        e.stopPropagation();
-                        openDetailModal(log.id);
-                    };
-                    logItem.className = 'w-full text-left bg-gradient-to-r from-brand-900/80 to-purple-900/80 hover:from-brand-600 hover:to-purple-600 border border-purple-500/40 rounded-lg p-1 text-[11px] sm:text-xs font-medium text-white truncate shadow transition flex items-center gap-1';
-                    logItem.innerHTML = `<i class="fa-solid fa-ticket text-[9px] text-amber-300"></i> <span class="truncate">${log.title}</span>`;
-                    logsContainer.appendChild(logItem);
-                });
-
-                dayCell.appendChild(logsContainer);
-
-                // Click blank day cell to add log for that date
-                dayCell.onclick = () => {
-                    openLogModal({ date: dateStr });
-                };
-
-                grid.appendChild(dayCell);
-            }
-        }
-
-
-        // --- LOG ADD/EDIT MODAL LOGIC ---
-        function openLogModal(initialData = {}) {
-            document.getElementById('log-form').reset();
-            document.getElementById('log-id').value = initialData.id || '';
-            document.getElementById('log-title').value = initialData.title || '';
-            document.getElementById('log-date').value = initialData.date || new Date().toISOString().split('T')[0];
-            document.getElementById('log-time').value = initialData.time || '';
-            document.getElementById('log-venue').value = initialData.venue || '';
-            document.getElementById('log-seat').value = initialData.seat || '';
-            document.getElementById('log-cast').value = initialData.cast || '';
-            document.getElementById('log-price').value = initialData.price || '';
-            document.getElementById('log-agency').value = initialData.agency || '';
-            document.getElementById('log-discount').value = initialData.discount || '';
-            document.getElementById('log-event').value = initialData.event || '';
-            document.getElementById('log-review').value = initialData.review || '';
-
-            document.getElementById('log-modal-title').innerText = initialData.id ? '관극 기록 수정' : '관극 기록 작성';
-            document.getElementById('log-modal').classList.remove('hidden');
-        }
-
-        function closeLogModal() {
-            document.getElementById('log-modal').classList.add('hidden');
-        }
-
-        function savePlayLog(e) {
-            e.preventDefault();
-
-            const id = document.getElementById('log-id').value || 'log-' + Date.now();
-            const title = document.getElementById('log-title').value;
-            const date = document.getElementById('log-date').value;
-            const time = document.getElementById('log-time').value;
-            const venue = document.getElementById('log-venue').value;
-            const seat = document.getElementById('log-seat').value;
-            const cast = document.getElementById('log-cast').value;
-            const price = Number(document.getElementById('log-price').value) || 0;
-            const agency = document.getElementById('log-agency').value;
-            const discount = document.getElementById('log-discount').value;
-            const event = document.getElementById('log-event').value;
-            const review = document.getElementById('log-review').value;
-
-            const newLog = { id, title, date, time, venue, seat, cast, price, agency, discount, event, review };
-
-            const existingIndex = playLogs.findIndex(l => l.id === id);
-            if (existingIndex > -1) {
-                playLogs[existingIndex] = newLog;
-            } else {
-                playLogs.push(newLog);
-            }
-
-            saveLogsToStorage();
-            closeLogModal();
-            renderCalendar();
-            renderStats();
-
-            // Set calendar month view to the logged date's month
-            const logDateObj = new Date(date);
-            currentYear = logDateObj.getFullYear();
-            currentMonth = logDateObj.getMonth();
-            renderCalendar();
-        }
-
-        // --- DETAIL MODAL LOGIC ---
-        function openDetailModal(logId) {
-            activeLogId = logId;
-            const log = playLogs.find(l => l.id === logId);
-            if (!log) return;
-
-            document.getElementById('detail-date-badge').innerText = log.date;
-            document.getElementById('detail-title').innerText = log.title;
-            document.getElementById('detail-time').innerText = log.time || '시간 정보 없음';
-            document.getElementById('detail-venue').innerText = log.venue || '공연장 미입력';
-            document.getElementById('detail-seat').innerText = log.seat || '좌석 정보 없음';
-
-            // Render cast tags
-            const castContainer = document.getElementById('detail-cast-tags');
-            castContainer.innerHTML = '';
-            if (log.cast) {
-                const castArray = log.cast.split(',').map(c => c.trim()).filter(c => c);
-                castArray.forEach(actor => {
-                    const tag = document.createElement('span');
-                    tag.className = 'px-2 py-0.5 rounded-md bg-purple-900/60 border border-purple-700/40 text-xs text-purple-200 font-medium';
-                    tag.innerText = actor;
-                    castContainer.appendChild(tag);
-                });
-            } else {
-                castContainer.innerText = '출연진 정보 없음';
-            }
-
-            const priceText = log.price ? `${log.price.toLocaleString()}원` : '금액 미입력';
-            const agencyText = log.agency ? ` (${log.agency})` : '';
-            document.getElementById('detail-price-agency').innerText = priceText + agencyText;
-
-            const discText = log.discount || '할인 없음';
-            const evtText = log.event ? ` / ${log.event}` : '';
-            document.getElementById('detail-discount-event').innerText = discText + evtText;
-
-            document.getElementById('detail-review').innerText = log.review || '작성된 후기가 없습니다.';
-
-            document.getElementById('detail-modal').classList.remove('hidden');
-        }
-
-        function closeDetailModal() {
-            document.getElementById('detail-modal').classList.add('hidden');
-            activeLogId = null;
-        }
-
-        function editCurrentLog() {
-            if (!activeLogId) return;
-            const log = playLogs.find(l => l.id === activeLogId);
-            closeDetailModal();
-            if (log) openLogModal(log);
-        }
-
-        function deleteCurrentLog() {
-            if (!activeLogId) return;
-            if (confirm('이 관극 기록을 정말 삭제하시겠습니까?')) {
-                playLogs = playLogs.filter(l => l.id !== activeLogId);
-                saveLogsToStorage();
-                closeDetailModal();
-                renderCalendar();
-                renderStats();
-            }
-        }
-
-
-        // --- TAB 2: STATISTICS & STAMP BOARD RENDERER ---
-        function renderStats() {
-            const selectedYear = document.getElementById('stats-year-select').value;
-
-            // Filter Logs by Year
-            const filteredLogs = selectedYear === 'ALL'
-                ? playLogs
-                : playLogs.filter(log => log.date.startsWith(selectedYear));
-
-            // KPI Counts
-            document.getElementById('stat-total-count').innerText = `${filteredLogs.length}회`;
-            const totalSpend = filteredLogs.reduce((sum, log) => sum + (log.price || 0), 0);
-            document.getElementById('stat-total-spend').innerText = `${totalSpend.toLocaleString()}원`;
-
-            // Venue count
-            const venueCounts = {};
-            filteredLogs.forEach(l => {
-                if (l.venue) venueCounts[l.venue] = (venueCounts[l.venue] || 0) + 1;
-            });
-            const topVenue = Object.entries(venueCounts).sort((a, b) => b[1] - a[1])[0];
-            document.getElementById('stat-top-venue').innerText = topVenue ? `${topVenue[0]} (${topVenue[1]}회)` : '-';
-
-            // Top Actors Calculation
-            const actorCounts = {};
-            filteredLogs.forEach(l => {
-                if (l.cast) {
-                    l.cast.split(',').forEach(c => {
-                        const actor = c.trim();
-                        if (actor) actorCounts[actor] = (actorCounts[actor] || 0) + 1;
-                    });
-                }
-            });
-            const sortedActors = Object.entries(actorCounts).sort((a, b) => b[1] - a[1]);
-            renderTopList('top-actors-list', sortedActors.slice(0, 3), '배우');
-
-            // Top Shows Calculation
-            const showCounts = {};
-            filteredLogs.forEach(l => {
-                if (l.title) showCounts[l.title] = (showCounts[l.title] || 0) + 1;
-            });
-            const sortedShows = Object.entries(showCounts).sort((a, b) => b[1] - a[1]);
-            renderTopList('top-shows-list', sortedShows.slice(0, 3), '작품');
-
-            // Store sorted rankings globally for full ranking modal
-            window.currentSortedActors = sortedActors;
-            window.currentSortedShows = sortedShows;
-
-            // Stamp Board Rendering
-            renderStampBoard(filteredLogs);
-        }
-
-        function renderTopList(elementId, items, type) {
-            const container = document.getElementById(elementId);
-            container.innerHTML = '';
-
-            if (items.length === 0) {
-                container.innerHTML = `<p class="text-xs text-gray-500 py-4 text-center">기록된 ${type} 데이터가 없습니다.</p>`;
-                return;
-            }
-
-            const rankBadges = ['bg-amber-500 text-black font-bold', 'bg-slate-300 text-black font-bold', 'bg-amber-700 text-white font-bold'];
-
-            items.forEach((item, index) => {
-                const row = document.createElement('div');
-                row.className = 'flex items-center justify-between bg-purple-950/40 p-3 rounded-xl border border-purple-900/30';
-                row.innerHTML = `
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-6 rounded-lg ${rankBadges[index] || 'bg-purple-900 text-purple-300'} text-xs flex items-center justify-center">${index + 1}</span>
-                        <span class="font-medium text-sm text-white">${item[0]}</span>
-                    </div>
-                    <span class="text-xs font-semibold text-brand-300 px-2.5 py-1 rounded-full bg-brand-900/40 border border-brand-500/30">${item[1]}회 관람</span>
-                `;
-                container.appendChild(row);
-            });
-        }
-
-        // FULL RANKING MODAL
-        function openFullRankingModal(type) {
-            const modal = document.getElementById('ranking-modal');
-            const title = document.getElementById('ranking-modal-title');
-            const list = document.getElementById('ranking-modal-list');
-            list.innerHTML = '';
-
-            const items = type === 'actors' ? window.currentSortedActors : window.currentSortedShows;
-            title.innerHTML = type === 'actors'
-                ? `<i class="fa-solid fa-user-astronaut text-amber-400"></i> 최다 관람 배우 전체 순위`
-                : `<i class="fa-solid fa-crown text-purple-400"></i> 최다 관람 작품 전체 순위`;
-
-            if (!items || items.length === 0) {
-                list.innerHTML = '<p class="text-xs text-gray-500 py-6 text-center">순위 데이터가 없습니다.</p>';
-            } else {
-                items.forEach((item, index) => {
-                    const row = document.createElement('div');
-                    row.className = 'flex items-center justify-between bg-purple-950/50 p-3 rounded-xl border border-purple-900/30';
-                    row.innerHTML = `
-                        <div class="flex items-center gap-3">
-                            <span class="w-7 h-7 rounded-lg font-bold text-xs flex items-center justify-center ${index === 0 ? 'bg-amber-500 text-black' : index === 1 ? 'bg-slate-300 text-black' : index === 2 ? 'bg-amber-700 text-white' : 'bg-purple-900 text-gray-300'}">${index + 1}</span>
-                            <span class="text-sm font-medium text-white">${item[0]}</span>
-                        </div>
-                        <span class="text-xs font-semibold text-brand-300 bg-brand-950 px-3 py-1 rounded-full border border-brand-800">${item[1]}회</span>
-                    `;
-                    list.appendChild(row);
-                });
-            }
-
-            modal.classList.remove('hidden');
-        }
-
-        function closeRankingModal() {
-            document.getElementById('ranking-modal').classList.add('hidden');
-        }
-
-        // STAMP BOARD
-        function renderStampBoard(logs) {
-            const grid = document.getElementById('stamp-board-grid');
-            grid.innerHTML = '';
-            document.getElementById('stamp-count-badge').innerText = `도장 ${logs.length}개 획득`;
-
-            if (logs.length === 0) {
-                grid.innerHTML = '<p class="col-span-full text-xs text-gray-500 py-8 text-center">해당 연도의 관극 도장이 없습니다. 관극을 기록해 도장을 모아보세요!</p>';
-                return;
-            }
-
-            logs.forEach((log, index) => {
-                const stamp = document.createElement('div');
-                stamp.onclick = () => openDetailModal(log.id);
-                stamp.className = 'stamp-card border border-purple-600/40 rounded-2xl p-3 flex flex-col items-center justify-center text-center cursor-pointer hover:scale-105 hover:border-brand-400 transition shadow-lg relative group aspect-square';
-                stamp.innerHTML = `
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-brand-600 to-rose-500 text-white flex items-center justify-center text-xs shadow-md mb-1.5 group-hover:rotate-12 transition">
-                        <i class="fa-solid fa-stamp"></i>
-                    </div>
-                    <span class="text-[10px] font-bold text-purple-300 block line-clamp-1">${log.title}</span>
-                    <span class="text-[9px] text-gray-400 block">${log.date.slice(5)}</span>
-                    <span class="absolute top-1 right-2 text-[9px] font-semibold text-purple-400/60">#${index + 1}</span>
-                `;
-                grid.appendChild(stamp);
-            });
-        }
-
-
-        // --- TAB 3: SHOW DB PAGE ---
-        function renderShowsGrid(filteredShows = null) {
-            const grid = document.getElementById('shows-grid');
-            grid.innerHTML = '';
-
-            const showsToRender = filteredShows || showDb;
-
-            if (showsToRender.length === 0) {
-                grid.innerHTML = '<p class="col-span-full text-xs text-gray-500 py-12 text-center">등록된 공연이 없습니다.</p>';
-                return;
-            }
-
-            showsToRender.forEach(show => {
-                const card = document.createElement('div');
-                card.className = 'bg-cardBg border border-purple-900/40 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between hover:border-purple-600/50 transition';
-                card.innerHTML = `
-                    <div>
-                        <div class="h-44 w-full overflow-hidden relative">
-                            <img src="${show.poster}" alt="${show.title}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/212130/ffffff?text=${encodeURIComponent(show.title)}'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-cardBg via-transparent to-transparent"></div>
-                            <span class="absolute bottom-2 left-3 px-2.5 py-0.5 rounded-md bg-purple-950/80 border border-purple-700/50 text-[11px] text-brand-300 font-medium">${show.venue}</span>
-                        </div>
-                        <div class="p-5 space-y-2">
-                            <h3 class="font-bold text-lg text-white">${show.title}</h3>
-                            <p class="text-xs text-purple-300 flex items-center gap-1.5">
-                                <i class="fa-regular fa-calendar"></i> ${show.period}
-                            </p>
-                            <p class="text-xs text-gray-400 line-clamp-2 pt-1">
-                                <span class="font-semibold text-gray-300">캐스트:</span> ${show.cast}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="p-4 pt-0">
-                        <button onclick="addLogFromShow('${show.id}')" class="w-full bg-purple-900/50 hover:bg-brand-600 border border-purple-600/40 text-white py-2.5 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-2 shadow-md">
-                            <i class="fa-solid fa-plus text-amber-400"></i> 내 관극으로 추가
-                        </button>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        function filterShows() {
-            const query = document.getElementById('show-search-input').value.toLowerCase();
-            const filtered = showDb.filter(show => 
-                show.title.toLowerCase().includes(query) ||
-                show.venue.toLowerCase().includes(query) ||
-                show.cast.toLowerCase().includes(query)
-            );
-            renderShowsGrid(filtered);
-        }
-
-        function addLogFromShow(showId) {
-            const show = showDb.find(s => s.id === showId);
-            if (!show) return;
-
-            switchTab('mypage');
-            openLogModal({
-                title: show.title,
-                venue: show.venue,
-                cast: show.cast
-            });
-        }
-
-        function openNewShowModal() {
-            document.getElementById('show-title-input').value = '';
-            document.getElementById('show-venue-input').value = '';
-            document.getElementById('show-period-input').value = '';
-            document.getElementById('show-cast-input').value = '';
-            document.getElementById('show-poster-input').value = '';
-            document.getElementById('new-show-modal').classList.remove('hidden');
-        }
-
-        function closeNewShowModal() {
-            document.getElementById('new-show-modal').classList.add('hidden');
-        }
-
-        function saveNewShow(e) {
-            e.preventDefault();
-            const title = document.getElementById('show-title-input').value;
-            const venue = document.getElementById('show-venue-input').value;
-            const period = document.getElementById('show-period-input').value;
-            const cast = document.getElementById('show-cast-input').value;
-            const poster = document.getElementById('show-poster-input').value || 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500&auto=format&fit=crop&q=80';
-
-            const newShow = {
-                id: 'show-' + Date.now(),
-                title, venue, period, cast, poster
-            };
-
-            showDb.unshift(newShow);
-            saveShowsToStorage();
-            closeNewShowModal();
-            renderShowsGrid();
-        }
-    </script>
 </body>
 </html>
